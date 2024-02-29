@@ -4,7 +4,8 @@ import java.io.*;
 import java.util.regex.Matcher;
 public class LongestWord {
     public static void main(String[] args) {
-        ArrayList<String> filteredWords= new ArrayList<>();
+        LinkedHashMap<Integer,String> filteredWords= new LinkedHashMap<>();
+        LinkedHashMap<Integer,Integer> report=new LinkedHashMap<>();
         ArrayList<String> unFliteredWords=new ArrayList<>();
         File inputFile = new File("words.txt");
         try{Scanner scanner=new Scanner(inputFile);
@@ -15,13 +16,22 @@ public class LongestWord {
         }catch(FileNotFoundException e){
             System.out.println("File not Found askies!!");
         }
+        int positionCount=0;
+        int longest=0;
         for(String euLine:unFliteredWords){
-            Pattern pattern= Pattern.compile("[!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~]");
+            Pattern pattern= Pattern.compile("\\p{Punct}");
             Matcher matcher =pattern.matcher(euLine);
             if(matcher.find()){
+                positionCount++;
                 String newString=euLine.replaceAll("\\p{Punct}", "");
+                filteredWords.put(positionCount,newString);
+                char[] splitString=newString.toCharArray();
+                int lengthOfNewString=splitString.length;
+                
+                System.out.println(positionCount+" "+newString);
 
             }
+
 
         }   
         
