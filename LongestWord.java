@@ -1,5 +1,8 @@
 import java.util.*;
 import java.util.regex.Pattern;
+
+import javax.swing.RowFilter.Entry;
+
 import java.io.*;
 import java.util.regex.Matcher;
 public class LongestWord {
@@ -18,6 +21,10 @@ public class LongestWord {
         }
         int positionCount=0;
         int longest=0;
+        int maxValue=Integer.MIN_VALUE;
+        int reportPosition=0;
+        //String newString="";
+
         for(String euLine:unFliteredWords){
             Pattern pattern= Pattern.compile("\\p{Punct}");
             Matcher matcher =pattern.matcher(euLine);
@@ -27,14 +34,27 @@ public class LongestWord {
                 filteredWords.put(positionCount,newString);
                 char[] splitString=newString.toCharArray();
                 int lengthOfNewString=splitString.length;
-                
                 report.put(positionCount, lengthOfNewString);
-                
-                System.out.println(positionCount+" "+newString);
+                //System.out.println(positionCount+" "+newString);
+                try {
+                    FileWriter fileWriter = new FileWriter("words2.txt");
+                    PrintWriter printWriter = new PrintWriter(fileWriter);
+        
+                    // Print your desired output here
+                    for(Map.Entry<Integer, String> entry: filteredWords.entrySet()){
+                        printWriter.println(entry.getKey()+" "+entry.getValue());
+                        //printWriter.println("The longest word is at position " + reportPosition);
 
+                    }
+                    printWriter.println("The longest word in this text file is "+"["+reportPosition+"]"+"\n"+filteredWords.get(reportPosition)+" with "+maxValue+" letters.");
+                   
+                    
+                    printWriter.close();
+                    fileWriter.close();
+                } catch (IOException e) {
+                    System.out.println("Error during reading/writing. Oops!");
+                }
             }
-            int maxValue=Integer.MIN_VALUE;
-            int reportPosition=0;
             for(Map.Entry<Integer,Integer> entry:report.entrySet()){
                 int value=entry.getValue();
                 if(value>maxValue){
@@ -44,25 +64,13 @@ public class LongestWord {
                     } 
                 }
             }
-            //int reportPosition=report.
-            File outputFile=new File("words2.txt");
-            try(Scanner userinput=new Scanner(System.in);
-                FileWriter writer = new FileWriter(outputFile);
-            ){
-                System.out.println("The following has been printed");
-                while (userinput.hasNextLine()) {
-                    String line =userinput.nextLine();
-                    if(line.equals("Done")){
-                        break;
-                    }
-                    writer.write(line+"\n");
-                }System.out.println("The longest word in this text file is "+"["+reportPosition+"]"+"\n"+report.get(reportPosition)+" with "+maxValue+" letters.");
-            }catch(IOException e){
-                e.printStackTrace();
-            
-
-
-        }   
+           
+        }
+        //System.out.println("The longest word in this text file is "+"["+reportPosition+"]"+"\n"+filteredWords.get(reportPosition)+" with "+maxValue+" letters.");
+       
+       
+       
         
     }
+
 }
