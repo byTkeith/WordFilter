@@ -28,8 +28,14 @@ public class LongestWord {
                 char[] splitString=newString.toCharArray();
                 int lengthOfNewString=splitString.length;
                 
+                report.put(positionCount, lengthOfNewString);
+                
                 System.out.println(positionCount+" "+newString);
 
+            }
+            int maxValue=Integer.MIN_VALUE;
+            for(Map.Entry<Integer,Integer> entry:report.entrySet()){
+                int value=entry.getValue();
             }
 
 
