@@ -34,9 +34,32 @@ public class LongestWord {
 
             }
             int maxValue=Integer.MIN_VALUE;
+            int reportPosition=0;
             for(Map.Entry<Integer,Integer> entry:report.entrySet()){
                 int value=entry.getValue();
+                if(value>maxValue){
+                    maxValue=value;
+                    if(entry.getValue()==maxValue){
+                        reportPosition=entry.getKey();
+                    } 
+                }
             }
+            //int reportPosition=report.
+            File outputFile=new File("words2.txt");
+            try(Scanner userinput=new Scanner(System.in);
+                FileWriter writer = new FileWriter(outputFile);
+            ){
+                System.out.println("The following has been printed");
+                while (userinput.hasNextLine()) {
+                    String line =userinput.nextLine();
+                    if(line.equals("Done")){
+                        break;
+                    }
+                    writer.write(line+"\n");
+                }System.out.println("The longest word in this text file is "+"["+reportPosition+"]"+"\n"+report.get(reportPosition)+" with "+maxValue+" letters.");
+            }catch(IOException e){
+                e.printStackTrace();
+            
 
 
         }   
