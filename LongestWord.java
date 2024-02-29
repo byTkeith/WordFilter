@@ -40,7 +40,6 @@ public class LongestWord {
                     FileWriter fileWriter = new FileWriter("words2.txt");
                     PrintWriter printWriter = new PrintWriter(fileWriter);
         
-                    // Print your desired output here
                     for(Map.Entry<Integer, String> entry: filteredWords.entrySet()){
                         printWriter.println(entry.getKey()+" "+entry.getValue());
                         //printWriter.println("The longest word is at position " + reportPosition);
