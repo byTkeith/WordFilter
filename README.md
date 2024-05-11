@@ -1,6 +1,6 @@
 # Longest Word Finder
 
-## Author: [Your Name]
+## Author: Tendai Nyevedzanai
 
 This Java program reads a text file containing words and identifies the longest word. It removes punctuation from the words and calculates the length of each word to determine the longest one.
 
